@@ -1,0 +1,10 @@
+------ Procedimento para o uso do Banco de Dados -------
+Na manipulação do nosso banco de dados usamos o simulador de servidor local WAMP.
+Nessa pasta temos o arquivo chamado "Arquivo banco"
+1.Usando o WAMP a pessoa deve ir ao navegador e digitar localhost.
+2.Fazer o login no phpmyadmin
+3.Criar um schema chamado "mydb" sem as aspas e colocar a collation utf8_general_ci
+4.Depois de criado o banco, é preciso seleciona-lo clicando 2 vezes no nome do mesmo.
+5.Clicar na seção "Import" e carregar o arquivo que está nessa pasta com todas as tabelas junto aos dados inseridos nas mesmas.
+6.Caso tudo ocorra corretamente basta usar a aplicação com o WAMP ligado é que a mesma irá funcionar corretamente
+7. O login da aplicação é javinha e senha é 123456 mas com um insert no banco na tabela 'central' pode-se criar outros usuarios
