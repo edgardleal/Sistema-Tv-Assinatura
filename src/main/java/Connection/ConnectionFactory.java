@@ -16,22 +16,36 @@ import java.sql.SQLException;
  *
  * @author Alexf
  */
-public class ConnectionFactory {
+public class ConnectionFactory implements AutoCloseable {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/mydb";
     private static final String USER = "root";
     private static final String PASS = "";
+    private static Connection connection;
     
     public static Connection getConnection(){
-        try {
-            Class.forName(DRIVER);
-            return DriverManager.getConnection(URL, USER, PASS);
-            
-        } catch (ClassNotFoundException | SQLException ex) {
-            throw new RuntimeException("Erro na conexão", ex);
+        if (connection == null) {
+            try {
+                Class.forName(DRIVER);
+                connection = DriverManager.getConnection(URL, USER, PASS);
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                throw new RuntimeException("Erro na conexão", ex);
+            }
         }
+        return connection;
     }
-    
+
+    /**
+     * <p>
+     *     Close internal connection
+     * </p>
+     */
+    public static void closeConnection(){
+        closeConnection(connection);
+        connection = null; // if getConnection is called again, this will be able to create other connection
+    }
+
     public static void closeConnection(Connection con){
         if(con != null){
             try {
@@ -65,7 +79,8 @@ public class ConnectionFactory {
         }
         closeConnection(con,stmt);
     }
-    
-    
-    
+
+    @Override public void close() throws Exception {
+        ConnectionFactory.closeConnection();
+    }
 }

@@ -97,14 +97,7 @@ public class CanalDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()){
-                Canal canal = new Canal();
-                canal.setNome(rs.getString("nomeCanal"));
-                canal.setNumero(rs.getInt("idCanal"));
-                canal.setIdCategoria(rs.getInt("Categoria_idCategoria"));
-                canal.setPrecoBase(rs.getFloat("precoBase"));
-                canal.setClassEtaria(rs.getInt("classEtaria"));
-                canal.setNomeCategoria(rs.getString("nomeCategoria"));
-                canais.add(canal);
+                canais.add(newCanalByResultaset(rs));
             }
         } catch (SQLException ex) {
             System.err.println("Erro ao procurar no banco" + ex);
@@ -113,7 +106,18 @@ public class CanalDAO {
         }
         return canais;
     }
-    
+
+    private Canal newCanalByResultaset(ResultSet rs) throws SQLException {
+        Canal canal = new Canal();
+        canal.setNome(rs.getString("nomeCanal"));
+        canal.setNumero(rs.getInt("idCanal"));
+        canal.setIdCategoria(rs.getInt("Categoria_idCategoria"));
+        canal.setPrecoBase(rs.getFloat("precoBase"));
+        canal.setClassEtaria(rs.getInt("classEtaria"));
+        canal.setNomeCategoria(rs.getString("nomeCategoria"));
+        return canal;
+    }
+
     public List<Canal> buscarTodosCanaisComCategoria(int  id){
         String sql = "	select * from canal  inner join categoria on Categoria_idCategoria = idCategoria where Categoria_idCategoria= ?" ;
         PreparedStatement stmt = null;
@@ -126,14 +130,7 @@ public class CanalDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()){
-                Canal canal = new Canal();
-                canal.setNome(rs.getString("nomeCanal"));
-                canal.setNumero(rs.getInt("idCanal"));
-                canal.setIdCategoria(rs.getInt("Categoria_idCategoria"));
-                canal.setPrecoBase(rs.getFloat("precoBase"));
-                canal.setClassEtaria(rs.getInt("classEtaria"));
-                canal.setNomeCategoria(rs.getString("nomeCategoria"));
-                canais.add(canal);
+                canais.add(newCanalByResultaset(rs));
             }
         } catch (SQLException ex) {
             System.err.println("Erro ao procurar no banco" + ex);
@@ -155,14 +152,7 @@ public class CanalDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()){
-                Canal canal = new Canal();
-                canal.setNome(rs.getString("nomeCanal"));
-                canal.setNumero(rs.getInt("idCanal"));
-                canal.setIdCategoria(rs.getInt("Categoria_idCategoria"));
-                canal.setPrecoBase(rs.getFloat("precoBase"));
-                canal.setClassEtaria(rs.getInt("classEtaria"));
-                canal.setNomeCategoria(rs.getString("nomeCategoria"));
-                canais.add(canal);
+                canais.add(newCanalByResultaset(rs));
             }
         } catch (SQLException ex) {
             System.err.println("Erro ao procurar no banco" + ex);
